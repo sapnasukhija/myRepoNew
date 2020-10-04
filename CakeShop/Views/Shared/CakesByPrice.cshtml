@@ -1,0 +1,55 @@
+﻿@model CakesListViewModel
+@{var CakesInRange200 = @Model.Cakes.ToList().Where(x => x.Price >= 200 && x.Price <= 250);}
+@{var CakesInRange300 = @Model.Cakes.ToList().Where(x => x.Price > 250 && x.Price <= 300);}
+
+<h2>Price 200-250</h2>
+<div class="col-lg-4 col-md-12 col-sm-6">
+
+    @foreach (var cake in CakesInRange200)
+    {
+        <div class="card" style="" onclick="javascript:window.location.href='/cakes/details/@cake.Id'">
+            <img class="card-img-top" src="@cake.ImageUrl" alt="@cake.Name">
+            <div class="card-body">
+                <h5 class="card-title d-inline float-left">
+                    @cake.Name
+                </h5>
+                <p class="card-text d-inline float-right">@cake.Price.ToString("c")</p>
+                <p class="card-text card-short-description"><i>@cake.ShortDescription</i></p>
+                <form asp-action="AddToShoppingCart"
+                      asp-controller="ShoppingCart"
+                      asp-route-cakeId="@cake.Id"
+                      method="post">
+                    <button class="btn btn-primary buy-now-btn float-right">Buy Now</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+
+<h2>Price 250-300</h2>
+<div class="col-lg-4 col-md-12 col-sm-6">
+
+    @foreach (var cake in CakesInRange300)
+    {
+        <div class="card" style="" onclick="javascript:window.location.href='/cakes/details/@cake.Id'">
+            <img class="card-img-top" src="@cake.ImageUrl" alt="@cake.Name">
+            <div class="card-body">
+                <h5 class="card-title d-inline float-left">
+                    @cake.Name
+                </h5>
+                <p class="card-text d-inline float-right">@cake.Price.ToString("c")</p>
+                <p class="card-text card-short-description"><i>@cake.ShortDescription</i></p>
+                <form asp-action="AddToShoppingCart"
+                      asp-controller="ShoppingCart"
+                      asp-route-cakeId="@cake.Id"
+                      method="post">
+                    <button class="btn btn-primary buy-now-btn float-right">Buy Now</button>
+                </form>
+            </div>
+        </div>
+    }
+    </div>
+
+
+
